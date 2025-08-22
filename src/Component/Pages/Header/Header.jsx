@@ -1,12 +1,16 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import style from "./Header.module.css";
+import { useContext } from "react";
+import { MyContext } from "../../App/App";
+
 const Header = () => {
+  const { user, setUser } = useContext(MyContext);
   return (
     <>
       <div className={style.Header}>
         <div className={style.Navbar}>
           <NavLink
-          to={"/"}
+            to={"/"}
             className={(e) =>
               e.isActive
                 ? style.Navbar_Items_Active
@@ -16,7 +20,7 @@ const Header = () => {
             Task List
           </NavLink>
           <NavLink
-          to={"/TaskForm"}
+            to={"/TaskForm"}
             className={(e) =>
               e.isActive
                 ? style.Navbar_Items_Active
@@ -27,7 +31,15 @@ const Header = () => {
           </NavLink>
         </div>
         <div className={style.User}>
-          <h1>Sina</h1>
+          <Link
+            className="text-4xl text-white"
+            onClick={() => {
+              setUser("Login");
+            }}
+            to={"/login"}
+          >
+            {user}
+          </Link>
         </div>
       </div>
     </>
