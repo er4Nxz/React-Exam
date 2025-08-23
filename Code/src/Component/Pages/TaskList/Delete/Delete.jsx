@@ -2,8 +2,8 @@ import axios from "axios";
 
 const Delete = ({ id }) => {
   const deleteList = () => {
-    axios.delete(`http://localhost:3000/List/${id}`).then(() => {
-      axios.get("http://localhost:3000/List");
+    axios.delete(`https://685c4d07769de2bf085c58e4.mockapi.io/Task/${id}`).then(() => {
+      axios.get("https://685c4d07769de2bf085c58e4.mockapi.io/Task");
     });
   };
   return (

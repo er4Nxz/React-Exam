@@ -5,7 +5,7 @@ import TaskForm from "../Pages/TaskForm/TaskForm";
 import Edit from "../Pages/TaskList/Edit/Edit";
 import FormLogin from "../Pages/FormLogin/FormLogin";
 import React, { useState } from "react";
-import withAuth from "../HOC/withAuth";
+import withAuth from "../../HOC/withAuth";
 
 export const MyContext = React.createContext();
 
@@ -13,7 +13,8 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState("");
 
-  const LoginNavigate = withAuth(FormLogin, () => Boolean(user));
+  const LoginNavigate = withAuth(FormLogin, () => Boolean(user)
+);
   return (
     <>
       <MyContext.Provider value={{ user, setUser, email, setEmail }}>

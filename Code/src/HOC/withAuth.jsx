@@ -4,8 +4,9 @@ const withAuth = (Component, conditionFunc) => {
   return (props) => {
     if (conditionFunc()) {
       return <Component {...props} />;
+    } else {
+      return <Navigate to={"/"} replace />;
     }
-    return <Navigate to={"/"} replace />;
   };
 };
 

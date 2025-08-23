@@ -17,7 +17,7 @@ const Update = ({ list }) => {
     e.preventDefault();
     const sendData = async () => {
       try {
-        let send = axios.put(`http://localhost:3000/List/${list.id}`, {
+        let send = axios.put(`https://685c4d07769de2bf085c58e4.mockapi.io/Task/${list.id}`, {
           object,
           descrption,
           isDone,

@@ -12,11 +12,14 @@ const TaskForm = () => {
   const handleForm = (e) => {
     e.preventDefault();
     const sendData = async () => {
-      let send = axios.post("http://localhost:3000/List", {
-        object,
-        descrption,
-        isDone,
-      });
+      let send = axios.post(
+        "https://685c4d07769de2bf085c58e4.mockapi.io/Task",
+        {
+          object,
+          descrption,
+          isDone,
+        }
+      );
     };
     sendData();
     navigate("/");

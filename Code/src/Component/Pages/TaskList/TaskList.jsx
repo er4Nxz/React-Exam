@@ -1,22 +1,22 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import TaskItem from "./TaskItem";
-import useApi from "../../Hooks/useApi";
+import useApi from "../../../Hooks/useApi";
 
 const TaskList = () => {
   const [filter, setFilter] = useState("all"); 
 
-  const [list, loading, error] = useApi("http://localhost:3000/List");
+  const [list, loading, error] = useApi("https://685c4d07769de2bf085c58e4.mockapi.io/Task");
 
-  const totalTasks = list?.length || 0;
+  const totalTasks = list?.length;
   
   const completedTasks =
-    list?.filter((item) => item.isDone === true).length || 0;
+    list?.filter((item) => item.isDone === true).length;
 
   const filteredList = list?.filter((item) => {
     if (filter === "completed") return item.isDone === true;
     if (filter === "pending") return item.isDone === false;
-    return true;
+    return item;
   });
 
   return (
