@@ -1,17 +1,30 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { MyContext } from "../../App/App";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const FormLogin = () => {
+  const navigate = useNavigate();
+
   const { setUser, setEmail } = useContext(MyContext);
 
+  const UserName = useRef("");
+  const Email = useRef("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setUser(UserName.current.value);
+    setEmail(Email.current.value);
+
+    navigate("/");
+  };
   return (
     <>
       <div className="w-1/3 bg-gray-500 rounded-2xl mx-auto my-3 p-3">
         <form
           action="#"
           onSubmit={(e) => {
-            e.preventDefault();
+            handleSubmit(e);
           }}
         >
           <label htmlFor="user-name" className="text-2xl text-white m-2">
@@ -21,9 +34,7 @@ const FormLogin = () => {
             type="text"
             id="user-name"
             className="form-control m-2"
-            onChange={(e) => {
-              setUser(e.target.value);
-            }}
+            ref={UserName}
           />
           <label htmlFor="email" className="text-2xl text-white m-2">
             Email :
@@ -32,11 +43,14 @@ const FormLogin = () => {
             type="email"
             id="email"
             className="form-control m-2 "
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
+            ref={Email}
           />
-          <Link className="btn btn-success m-2 text-center" to={"/"}>Submit</Link>
+          <button
+            type="submit"
+            className="btn btn-success m-2 text-center"
+          >
+            Submit
+          </button>
         </form>
       </div>
     </>

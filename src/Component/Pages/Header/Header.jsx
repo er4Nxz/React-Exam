@@ -32,13 +32,13 @@ const Header = () => {
         </div>
         <div className={style.User}>
           <Link
-            className="text-4xl text-white"
+            className={style.UserText}
             onClick={() => {
               setUser("Login");
             }}
             to={"/login"}
           >
-            {user}
+            {user?user:"Login"}
           </Link>
         </div>
       </div>
