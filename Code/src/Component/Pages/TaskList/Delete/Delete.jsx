@@ -9,7 +9,7 @@ const Delete = ({ id }) => {
   return (
     <>
       <button
-        className="btn btn-danger"
+        className="bg-red-600 text-white px-4 py-2 transition-all duration-300 hover:bg-red-700"
         onClick={() => {
           deleteList();
         }}

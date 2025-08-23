@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import TaskItem from "./TaskItem";
 import useApi from "../../../Hooks/useApi";
@@ -21,53 +20,61 @@ const TaskList = () => {
 
   return (
     <>
-      <div className="w-1/2 m-3 p-3 rounded-2xl bg-black/[0.7] mx-auto">
-        <p className="text-center text-white tracking-[2px] text-4xl">
-          Task Items
-        </p>
+      <div className="w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto p-4 md:p-6">
+        <div className="bg-gradient-to-br from-gray-800 via-black to-gray-900 rounded-2xl p-6 shadow-2xl">
+          <p className="text-center text-white tracking-wider text-3xl md:text-4xl font-bold mb-6">
+            📋 Task Items
+          </p>
 
-        <div className="flex justify-center gap-3 mb-4">
-          <button
-            onClick={() => setFilter("all")}
-            className={`px-4 py-2 rounded-lg ${
-              filter === "all"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-500 text-white hover:bg-gray-600"
-            }`}
-          >
-            All Tasks / {totalTasks}
-          </button>
-          <button
-            onClick={() => setFilter("completed")}
-            className={`px-4 py-2 rounded-lg ${
-              filter === "completed"
-                ? "bg-green-500 text-white"
-                : "bg-gray-500 text-white hover:bg-gray-600"
-            }`}
-          >
-            Completed / {completedTasks}
-          </button>
-          <button
-            onClick={() => setFilter("pending")}
-            className={`px-4 py-2 rounded-lg ${
-              filter === "pending"
-                ? "bg-orange-500 text-white"
-                : "bg-gray-500 text-white hover:bg-gray-600"
-            }`}
-          >
-            Pending / {totalTasks - completedTasks}
-          </button>
+          <div className="flex flex-col sm:flex-row justify-center gap-3 mb-6">
+            <button
+              onClick={() => setFilter("all")}
+              className={`px-5 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 ${
+                filter === "all"
+                  ? "bg-blue-600 text-white shadow-lg shadow-blue-500/50"
+                  : "bg-gray-700 text-gray-200 hover:bg-gray-600"
+              }`}
+            >
+              All Tasks / {totalTasks}
+            </button>
+            <button
+              onClick={() => setFilter("completed")}
+              className={`px-5 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 ${
+                filter === "completed"
+                  ? "bg-green-600 text-white shadow-lg shadow-green-500/50"
+                  : "bg-gray-700 text-gray-200 hover:bg-gray-600"
+              }`}
+            >
+              Completed / {completedTasks}
+            </button>
+            <button
+              onClick={() => setFilter("pending")}
+              className={`px-5 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 ${
+                filter === "pending"
+                  ? "bg-orange-600 text-white shadow-lg shadow-orange-500/50"
+                  : "bg-gray-700 text-gray-200 hover:bg-gray-600"
+              }`}
+            >
+              Pending / {totalTasks - completedTasks}
+            </button>
+          </div>
+
+          {error ? (
+            <div className="text-center text-red-400 bg-red-900/30 p-4 rounded-xl">
+              <h1 className="text-xl font-semibold">⚠️ {error}</h1>
+            </div>
+          ) : loading ? (
+            <div className="flex justify-center items-center py-8">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {filteredList?.map((item) => {
+                return <TaskItem item={item} key={item.id} />;
+              })}
+            </div>
+          )}
         </div>
-
-        {error ? (
-          <h1 className="text-center text-danger">{error}</h1>
-        ) : loading ? (
-          <div className="spinner-border"></div>
-        ) : (
-          filteredList?.map((item) => {
-            return <TaskItem item={item} key={item.id} />;
-          })
-        )}
       </div>
     </>
   );

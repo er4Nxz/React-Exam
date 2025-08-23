@@ -7,30 +7,37 @@ const TaskItem = ({ item }) => {
 
   return (
     <>
-      <div className="bg-gray-600 p-4 rounded-[10px] m-3">
-        <div>
-          <label
-            htmlFor={`object${item.id}`}
-            className={
-              !isDone
-                ? "cursor-pointer text-2xl text-white inline-block mr-2"
-                : "cursor-pointer text-2xl text-white inline-block line-through mr-2"
-            }
-          >
-            {item.object}
-          </label>
+      <div className="bg-gray-700 p-4 rounded-lg m-3 shadow-md transition-transform transform hover:scale-105">
+        <div className="flex items-center">
           <input
             type="checkbox"
             id={`object${item.id}`}
             checked={isDone}
             onChange={() => setIsDone(!isDone)}
+            className="mr-3 cursor-pointer"
           />
+          <label
+            htmlFor={`object${item.id}`}
+            className={`text-xl text-white cursor-pointer ${
+              isDone ? "line-through" : ""
+            }`}
+          >
+            {item.object}
+          </label>
         </div>
-        <div className="p-3 rounded-2xl bg-gray-400 m-3">{item.descrption}</div>
-        <Delete id={item.id} />
-        <Link className="btn btn-info text-white mx-2" to={`/Edit/${item.id}`}>
-          Edit
-        </Link>
+        <div className="p-3 rounded-2xl bg-gray-500 text-white mt-2">
+          {item.descrption}
+        </div>
+        <div className="flex justify-between mt-3">
+          <Delete id={item.id} />
+          <Link
+            className="bg-blue-600 text-white px-4 py-2 transition-all duration-300 hover:bg-blue-700"
+            style={{textDecoration:"none"}}
+            to={`/Edit/${item.id}`}
+          >
+            Edit
+          </Link>
+        </div>
       </div>
     </>
   );
