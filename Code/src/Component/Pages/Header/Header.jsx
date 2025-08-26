@@ -1,10 +1,9 @@
-import { Link, NavLink } from "react-router-dom";
-import { useContext } from "react";
-import { MyContext } from "../../App/App";
+import {  NavLink, useNavigate } from "react-router-dom";
 import style from "./Header.module.css";
 
 const Header = () => {
-  const { user, setUser } = useContext(MyContext);
+  const UserName = localStorage.getItem("UserName");
+  const navigate = useNavigate();
   return (
     <>
       <div className="w-full bg-gradient-to-r from-gray-900 via-black to-gray-900 px-4 py-3 shadow-lg">
@@ -38,16 +37,17 @@ const Header = () => {
             </NavLink>
           </div>
           <div className="flex items-center">
-            <Link
+            <button
               className="text-xl font-bold text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-all duration-300 hover:scale-105 shadow-md"
               onClick={() => {
-                setUser("Login");
+                navigate("/login")
+                localStorage.removeItem("UserName");
+                location.reload();
               }}
               style={{ textDecoration: "none" }}
-              to={"/login"}
             >
-              {user ? user : "Login"}
-            </Link>
+              {UserName || "Login"}
+            </button>
           </div>
         </div>
       </div>

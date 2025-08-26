@@ -5,16 +5,14 @@ import TaskForm from "../Pages/TaskForm/TaskForm";
 import Edit from "../Pages/TaskList/Edit/Edit";
 import FormLogin from "../Pages/FormLogin/FormLogin";
 import React, { useState } from "react";
-import withAuth from "../../HOC/withAuth";
 
 export const MyContext = React.createContext();
 
 const App = () => {
   const [user, setUser] = useState(null);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(null);
 
-  const LoginNavigate = withAuth(FormLogin, () => Boolean(user)
-);
+  const UserName = localStorage.getItem("UserName");
   return (
     <>
       <MyContext.Provider value={{ user, setUser, email, setEmail }}>
@@ -24,7 +22,10 @@ const App = () => {
             <Route path="/" element={<TaskList />} />
             <Route path="/TaskForm" element={<TaskForm />} />
             <Route path="/Edit/:id" element={<Edit />} />
-            <Route path="/login" element={<LoginNavigate />} />
+            <Route
+              path="/login"
+              element={UserName ? <Navigate to={"/"} /> : <FormLogin />}
+            />
           </Routes>
         </BrowserRouter>
       </MyContext.Provider>

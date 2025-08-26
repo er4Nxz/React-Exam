@@ -16,6 +16,8 @@ const FormLogin = () => {
     setUser(UserName.current.value);
     setEmail(Email.current.value);
 
+    localStorage.setItem("UserName", UserName.current.value);
+
     navigate("/");
   };
   return (
@@ -33,7 +35,10 @@ const FormLogin = () => {
             className="space-y-6"
           >
             <div>
-              <label htmlFor="user-name" className="block text-white text-xl font-semibold mb-2">
+              <label
+                htmlFor="user-name"
+                className="block text-white text-xl font-semibold mb-2"
+              >
                 User Name:
               </label>
               <input
@@ -45,7 +50,10 @@ const FormLogin = () => {
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-white text-xl font-semibold mb-2">
+              <label
+                htmlFor="email"
+                className="block text-white text-xl font-semibold mb-2"
+              >
                 Email:
               </label>
               <input
