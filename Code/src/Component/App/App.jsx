@@ -8,7 +8,7 @@ import React, { useState } from "react";
 
 export const MyContext = React.createContext();
 
-const App = () => {
+const App = () => { 
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState(null);
 
